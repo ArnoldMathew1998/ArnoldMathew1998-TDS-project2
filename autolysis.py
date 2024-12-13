@@ -20,6 +20,8 @@ import matplotlib.pyplot as plt
 import requests
 import json
 
+
+
 # Install missing dependencies
 def ensure_dependencies():
     required_packages = ["chardet", "seaborn", "matplotlib", "pandas", "requests"]
@@ -74,7 +76,9 @@ def create_visualizations(df, output_dir):
     os.makedirs(output_dir, exist_ok=True)
     created_charts = []
 
-    for column in numeric_columns:
+    for i, column in enumerate(numeric_columns):
+        if i >= 3:  # Limit to 3 charts
+            break
         try:
             plt.figure()
             sns.histplot(df[column].dropna(), kde=True)
