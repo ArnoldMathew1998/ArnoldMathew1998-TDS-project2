@@ -20,10 +20,9 @@ import matplotlib.pyplot as plt
 import requests
 import json
 
-
-
-# Install missing dependencies
+# Function to ensure all dependencies are installed
 def ensure_dependencies():
+    """Check and install missing dependencies."""
     required_packages = ["chardet", "seaborn", "matplotlib", "pandas", "requests"]
     for package in required_packages:
         try:
@@ -32,11 +31,11 @@ def ensure_dependencies():
             print(f"'{package}' module not found. Installing...")
             subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# Ensure all dependencies are installed
+# Ensure dependencies are installed
 ensure_dependencies()
 import chardet  # Safe to import after installation check
 
-# Constants
+# Constants for API configuration
 API_URL = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 AIPROXY_TOKEN = os.getenv("AIPROXY_TOKEN")
 HEADERS = {
@@ -110,6 +109,7 @@ def generate_narrative(analysis):
     return "Narrative generation failed due to an error."
 
 def main():
+    """Main function to execute the autolysis process."""
     if len(sys.argv) != 2:
         print("Usage: python autolysis.py <file_path>")
         sys.exit(1)
